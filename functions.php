@@ -92,6 +92,21 @@ function namirah_setup() {
 		'default-image' => '',
 	) ) );
 
+	// Add theme support for selective refresh for widgets.
+	add_theme_support( 'customize-selective-refresh-widgets' );
+
+	/**
+	 * Add support for core custom logo.
+	 *
+	 * @link https://codex.wordpress.org/Theme_Logo
+	 */
+	add_theme_support( 'custom-logo', array(
+		'height'      => 112,
+		'width'       => 160,
+		'flex-width'  => true,
+		'flex-height' => true,
+	) );
+
 	add_image_size( 'slide', 0, '520', false );
 	add_image_size( 'slidethumb', '72', '72', true );
 	add_image_size( 'blogpost', '750', '415', false );
@@ -158,8 +173,6 @@ function namirah_scripts() {
 	wp_enqueue_style( 'playfair-font', 'http://fonts.googleapis.com/css?family=Playfair+Display:400,700,400italic,700italic', '', null );
 	wp_enqueue_style( 'unica-one-font', 'http://fonts.googleapis.com/css?family=Unica+One', '', null );
 	wp_enqueue_style( 'alegreya-font', 'http://fonts.googleapis.com/css?family=Alegreya:400italic,400,700', '', null );
-	$namirah_custom_style = get_theme_mod( 'css_code_setting', '' );
-	wp_add_inline_style( 'main-style', $namirah_custom_style );
 
 	// Enqueue Js scripts
 	wp_enqueue_script('jquery');
@@ -172,17 +185,10 @@ function namirah_scripts() {
 		wp_enqueue_script( 'comment-reply' );
 	}
 
-	wp_enqueue_script('nm-like-post', get_template_directory_uri().'/assets/js/like-post.js', array('jquery'), '1.0', true );
-	wp_localize_script('nm-like-post', 'ajax_var', array(
-	    'url' => admin_url('admin-ajax.php'),
-	));
 	wp_enqueue_script('jquery-migrate-js', get_template_directory_uri() . '/assets/js/jquery-migrate-1.2.1.min.js', array('jquery'), null, true );
 	wp_enqueue_script('bootstrap-js', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array('jquery'), null, true );
 	wp_enqueue_script('plugins-js', get_template_directory_uri() . '/assets/js/plugins.js', array('jquery'), null, true );
 	wp_enqueue_script('init-js', get_template_directory_uri() . '/assets/js/init.js', array('jquery'), null, true );
-
-	$namirah_custom_script = get_theme_mod( 'js_code_setting', '' );    
-    wp_add_inline_script( 'init-js', $namirah_custom_script );
 
 }
 add_action( 'wp_enqueue_scripts', 'namirah_scripts' );
@@ -200,9 +206,6 @@ require get_template_directory().'/widgets/about-author-widget.php';
 require get_template_directory().'/widgets/tags-widget.php';
 //require get_template_directory().'/widgets/ads-widget.php';
 
-
-// Post Like 
-include get_template_directory().'/inc/like-post.php';
 
 /**
  * Implement the Custom Header feature.

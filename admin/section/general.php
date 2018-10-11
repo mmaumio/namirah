@@ -56,27 +56,3 @@ Kirki::add_field( 'namirah_config', array(
         ),
     ),
 ) );
-
-Kirki::add_field( 'namirah_config', array(
-    'type'        => 'code',
-    'settings'    => 'css_code_setting',
-    'label'       => esc_attr__( 'Css Code', 'namirah' ),
-    'description' => esc_attr__( 'Put your custom css code here', 'namirah' ),
-    'section'     => 'general_section',
-    'default'     => '',
-    'choices'     => array(
-        'language' => 'css',
-    ),
-) );
-
-Kirki::add_field( 'namirah_config', array(
-    'type'        => 'code',
-    'settings'    => 'js_code_setting',
-    'label'       => esc_attr__( 'JS Code', 'namirah' ),
-    'description' => esc_attr__( 'Put your custom Javascript code here', 'namirah' ),
-    'section'     => 'general_section',
-    'default'     => '',
-    'choices'     => array(
-        'language' => 'js',
-    ),
-) );

@@ -13,7 +13,12 @@
 
 get_header(); ?>
 
-<?php get_template_part( 'partials/featured-carousel' ); ?>
+<?php 
+$nm_feat_post = nm_featured_posts(4); 
+if ( !empty($nm_featured_post) )
+	get_template_part( 'partials/featured-carousel' ); 
+
+?>
 
 <?php get_template_part( 'content', 'blog' ); ?>
 

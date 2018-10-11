@@ -27,18 +27,6 @@ Kirki::add_field( 'namirah_config', array(
 	),
 ) );
 
-Kirki::add_field( 'namirah_config', array(
-	'type'        => 'switch',
-	'settings'    => 'post_like',
-	'label'       => __( 'Post Like', 'namirah' ),
-	'section'     => 'blog_section',
-	'default'     => '1',
-	'priority'    => 10,
-	'choices'     => array(
-		'on'  => esc_attr__( 'Enable', 'namirah' ),
-		'off' => esc_attr__( 'Disable', 'namirah' ),
-	),
-) );
 
 Kirki::add_field( 'namirah_config', array(
 	'type'        => 'switch',

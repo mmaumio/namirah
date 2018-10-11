@@ -13,8 +13,6 @@
 	 div" data-cycle-fx="fade" data-cycle-timeout="5000" data-cycle-speed="1000" data-cycle-pager="#per-slide-template" data-cycle-prev=".prevControl" data-cycle-next=".nextControl" data-cycle-auto-height="container">
      
      <?php
-
-	    $nm_feat_post = nm_featured_posts(4); 
     
 	    if ( isset($nm_feat_post) ) {
 	        foreach ($nm_feat_post as $post) : setup_postdata($post);

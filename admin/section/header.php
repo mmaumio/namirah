@@ -7,15 +7,6 @@ Kirki::add_section( 'header_section', array(
 ) );
 
 Kirki::add_field( 'namirah_config', array(
-	'type'        => 'image',
-	'settings'    => 'logo_image',
-	'label'       => esc_attr__( 'Logo', 'namirah' ),
-	'description' => esc_attr__( 'Upload your Logo here.', 'namirah' ),
-	'section'     => 'header_section',
-	'default'     => '',
-) );
-
-Kirki::add_field( 'namirah_config', array(
 	'type'        => 'select',
 	'settings'    => 'header_variation',
 	'label'       => esc_attr__( 'Header Variation', 'namirah' ),

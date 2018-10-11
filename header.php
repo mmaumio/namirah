@@ -15,7 +15,6 @@ global $nm_option; ?>
 <meta charset="<?php bloginfo( 'charset' ); ?>">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="profile" href="http://gmpg.org/xfn/11">
-<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 <?php wp_head(); ?>
 </head>
 
@@ -39,25 +38,26 @@ global $nm_option; ?>
         ?>
         <div class="branding">
             <div class="container">
-                <div class="logo">
-                    <?php 
-                        $nm_logo = get_theme_mod( 'logo_image', '' );
-                        if( !empty( $nm_logo ) ) { 
-                    ?>
-                    <a href="<?php echo esc_url( site_url( '/' ) ); ?>">
-                        <img src="<?php echo $nm_logo; ?>" alt="<?php echo bloginfo('name'); ?>">
-                    </a>
-                    <?php } else { ?>
-                    <h1><a href="<?php echo esc_url( site_url( '/' ) ); ?>"><?php echo bloginfo( 'name' ); ?>
-                        <span>
-                            <?php if( get_theme_mod( 'show_hide_tag', '' ) == '1' ) { ?>
-                                <h2 class="blog-tagline"><?php bloginfo('description'); ?></h2>
-                            <?php } ?>
-                        </span>
-                    </a>
-                    </h1>
-                <?php } ?>
-                </div>  
+                <?php
+                    the_custom_logo();
+                    if ( display_header_text() == true ) {
+                        if ( is_front_page() && is_home() ) :
+                            ?>
+                            <h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+                            <?php
+                        else :
+                            ?>
+                            <p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
+                            <?php
+                        endif;
+                        $namirah_description = get_bloginfo( 'description', 'display' );
+                        if ( $namirah_description || is_customize_preview() ) :
+                            ?>
+                            <h2 class="site-description blog-tagline"><?php echo $namirah_description; ?></p>
+                        <?php 
+                        endif; 
+                    }
+                ?>
             </div>
         </div>
         <?php
@@ -65,4 +65,11 @@ global $nm_option; ?>
             get_template_part( 'partials/navigation' ); 
         } 
         ?>
+        <?php if ( get_header_image() ) : ?>
+            <div id="site-header" class="container">
+                <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+                    <img src="<?php header_image(); ?>" width="<?php echo absint( get_custom_header()->width ); ?>" height="<?php echo absint( get_custom_header()->height ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>">
+                </a>
+            </div>
+        <?php endif; ?>
     </header>

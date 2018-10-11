@@ -20,7 +20,7 @@
                         <?php echo get_avatar( get_the_author_meta( 'ID' ), '80', 'http://indietravelpodcast.com/images/no_gravatar.jpg'); ?>
                     </div>
                     <div class="f-a-meta">
-                        <span><?php the_time('F j, Y'); ?></span>
+                        <span><a href="<?php echo esc_url( get_permalink() ); ?>"><?php the_time('F j, Y'); ?></a></span>
                         <span><?php _e('By ', 'namirah') . the_author_posts_link(); ?></span>
                     </div>
                 </div>
@@ -31,12 +31,6 @@
                         <a href="" class="waves-effect p-comments">
                             <span><i class="fa fa-comments"></i></span>
                             <span class="f-count"><?php echo get_comments_number( '0', '1', '%' ); ?></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="waves-effect p-love">
-                            <span><i class="fa fa-heart"></i></span>
-                            <span class="like f-count" data-rel="<?php echo $post->ID; ?>"><?php echo likeCount($post->ID); ?></span>
                         </a>
                     </li>
                 </ul>

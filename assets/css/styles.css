@@ -10095,7 +10095,7 @@ a.waves-effect .waves-ripple {
 }
 /*--- 7.2 Branding/Logo ---*/
 .branding {
-  height: 192px;
+  height: auto;
   text-align: center;
   margin-top: 48px;
 }
