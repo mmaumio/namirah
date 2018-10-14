@@ -19,19 +19,6 @@ Kirki::add_field( 'namirah_config', array(
 ) );
 
 Kirki::add_field( 'namirah_config', array(
-	'type'        => 'switch',
-	'settings'    => 'show_hide_tag',
-	'label'       => __( 'Show/Hide Tagline', 'namirah' ),
-	'section'     => 'header_section',
-	'default'     => '1',
-	'priority'    => 10,
-	'choices'     => array(
-		'on'  => esc_attr__( 'Enable', 'namirah' ),
-		'off' => esc_attr__( 'Disable', 'namirah' ),
-	),
-) );
-
-Kirki::add_field( 'namirah_config', array(
     'type'        => 'typography',
     'settings'    => 'header_nav_font',
     'label'       => esc_attr__( 'Navigation Font', 'namirah' ),
