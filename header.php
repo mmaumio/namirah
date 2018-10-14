@@ -31,7 +31,7 @@ global $nm_option; ?>
 <div class="page-wrapper <?php echo $sidebar_layout; ?>">
     <header>
         <?php 
-        $nm_header_var = get_theme_mod( 'header_variation', '' );
+        $nm_header_var = get_theme_mod( 'header_variation', 'top' );
         if( $nm_header_var == "top" ) {
             get_template_part( 'partials/navigation' ); 
         }

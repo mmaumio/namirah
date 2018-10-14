@@ -1459,11 +1459,7 @@ a.bg-danger:hover {
   margin: 40px 0 20px;
   border-bottom: 1px solid #eeeeee;
 }
-ul,
-ol {
-  margin-top: 0;
-  margin-bottom: 10px;
-}
+
 ul ul,
 ol ul,
 ul ol,
@@ -6665,7 +6661,7 @@ hr {
 }
 ul,
 ol {
-  margin: 0 0 1.5em 3em;
+  margin: 0 0 .5em .5em;
 }
 ul {
   list-style: disc;
@@ -6979,6 +6975,11 @@ a:active {
 /*--------------------------------------------------------------
 2.8 Content
 --------------------------------------------------------------*/
+
+.blog-container {
+    margin-top: 72px;
+}
+
 /*--------------------------------------------------------------
 10.1 Posts and pages
 --------------------------------------------------------------*/
