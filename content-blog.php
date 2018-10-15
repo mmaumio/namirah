@@ -64,7 +64,7 @@
 				<?php if( is_single() ) { ?>
 
                 <div class="related-blog-section section-wrap">
-                    <h3 class="inner-h">You May Also Like</h3>
+                    <h3 class="inner-h"><?php _e( 'You May Also Like', 'namirah' ); ?></h3>
                     <div>
                         <div class="row">
                         <?php	

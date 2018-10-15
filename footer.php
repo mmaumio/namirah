@@ -31,15 +31,20 @@
                     <div class="row">
                         <div class="col-md-7">
                             <div class="copyright-info">
-                                <span>Copyright © 2015 Namirah - Blog Theme Demo by <a href="http://themepicasso.com/">ThemePicasso</a></span>
+                                <?php
+                                    $namirah_copyright = get_theme_mod( 'footer_copyright' );
+                                    if ( !empty( $namirah_copyright ) ) 
+                                        echo '<span>' . $namirah_copyright . '</span>';  
+                                ?>        
                             </div>
                         </div>
                         <div class="col-md-5">
                             <div class="social-profile">
-                                <a href="#" class="waves-effect s-facebook"><i class="fa fa-facebook"></i></a>
-                                <a href="#" class="waves-effect s-twitter"><i class="fa fa-twitter"></i></a>
-                                <a href="#" class="waves-effect s-gplus"><i class="fa fa-google-plus"></i></a>
-                                <a href="#" class="waves-effect s-pinterest"><i class="fa fa-pinterest"></i></a>
+                                <a href="<?php echo esc_url( get_theme_mod( 'facebook_url', '#' ) ); ?>" class="waves-effect s-facebook"><i class="fa fa-facebook"></i></a>
+                                <a href="<?php echo esc_url( get_theme_mod( 'twitter_url', '#' ) ); ?>" class="waves-effect s-twitter"><i class="fa fa-twitter"></i></a>
+                                <a href="<?php echo esc_url( get_theme_mod( 'google_plus_url', '#' ) ); ?>" class="waves-effect s-gplus"><i class="fa fa-google-plus"></i></a>
+                                <a href="<?php echo esc_url( get_theme_mod( 'linkedin_url', '#' ) ); ?>" class="waves-effect s-gplus"><i class="fa fa-linkedin"></i></a>
+                                <a href="<?php echo esc_url( get_theme_mod( 'pinterest_url', '#' ) ); ?>" class="waves-effect s-pinterest"><i class="fa fa-pinterest"></i></a>
                             </div>
                         </div>
                     </div>

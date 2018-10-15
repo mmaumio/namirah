@@ -22,5 +22,4 @@ include_once dirname( __FILE__ ) . '/section/header.php';
 include_once dirname( __FILE__ ) . '/section/blog.php';
 include_once dirname( __FILE__ ) . '/section/layout.php';
 include_once dirname( __FILE__ ) . '/section/contact.php';
-include_once dirname( __FILE__ ) . '/section/social.php';
 include_once dirname( __FILE__ ) . '/section/footer.php';

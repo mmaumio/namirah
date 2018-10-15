@@ -83,7 +83,7 @@ function namirah_setup() {
 	 * See http://codex.wordpress.org/Post_Formats
 	 */
 	add_theme_support( 'post-formats', array(
-		'aside', 'image', 'video', 'quote', 'link', 'audio'
+		'aside', 'image', 'gallery', 'video', 'quote', 'link', 'audio'
 	) );
 
 	// Set up the WordPress core custom background feature.
@@ -132,32 +132,34 @@ function namirah_widgets_init() {
 		'before_title'  => '<div class="widget-h"><h3>',
 		'after_title'   => '</h3></div>',
 	) );
-	for ($i=1; $i < 5 ; $i++) { 
-		register_sidebar( array(
-	        'name'          => sprintf( __( 'Footer Widget %u', 'namirah' ), $i ),
-	        'id'            => 'footer-widget-'.$i,
-	        'description'   => __( 'Footer Widget 1 sidebar', 'namirah' ),
-	        'before_widget' => '<div id="%1$s" class="widget-block %2$s">',
-	        'after_widget'  => '</div>',
-	        'before_title'  => '<div class="widget-h"><h3>',
-	        'after_title'   => '</h3></div>',
-		) );	
-	}
-
-	global $nm_option;
-	if( !empty($nm_option['multi-sidebar']) ) {
-		for( $i=0; $i<count($nm_option['multi-sidebar']); $i++ ) {
-			register_sidebar( array(
-		        'name'          => $nm_option['multi-sidebar'][$i],
-		        'id'            => str_replace(' ', '-', strtolower($nm_option['multi-sidebar'][$i]) ),
-		        'description'   => '',
-				'before_widget' => '<div id="%1$s" class="widget-block %2$s">',
-				'after_widget'  => '</div>',
-				'before_title'  => '<div class="widget-h"><h3>',
-				'after_title'   => '</h3></div>',
-    		) );	
-		}
-	}  
+	
+	register_sidebar( array(
+        'name'          => __( 'Footer Widget Left', 'namirah' ),
+        'id'            => 'footer-widget-left',
+        'description'   => __( 'Footer Widget Left', 'namirah' ),
+        'before_widget' => '<div id="%1$s" class="widget-block %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<div class="widget-h"><h3>',
+        'after_title'   => '</h3></div>',
+	) );	
+	register_sidebar( array(
+        'name'          => __( 'Footer Widget Center', 'namirah' ),
+        'id'            => 'footer-widget-center',
+        'description'   => __( 'Footer Widget Center', 'namirah' ),
+        'before_widget' => '<div id="%1$s" class="widget-block %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<div class="widget-h"><h3>',
+        'after_title'   => '</h3></div>',
+	) );	
+	register_sidebar( array(
+        'name'          => __( 'Footer Widget Right', 'namirah' ),
+        'id'            => 'footer-widget-right',
+        'description'   => __( 'Footer Widget Right', 'namirah' ),
+        'before_widget' => '<div id="%1$s" class="widget-block %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<div class="widget-h"><h3>',
+        'after_title'   => '</h3></div>',
+	) );	
 }
 
 add_action( 'widgets_init', 'namirah_widgets_init' );
@@ -185,7 +187,6 @@ function namirah_scripts() {
 		wp_enqueue_script( 'comment-reply' );
 	}
 
-	wp_enqueue_script('jquery-migrate-js', get_template_directory_uri() . '/assets/js/jquery-migrate-1.2.1.min.js', array('jquery'), null, true );
 	wp_enqueue_script('bootstrap-js', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array('jquery'), null, true );
 	wp_enqueue_script('plugins-js', get_template_directory_uri() . '/assets/js/plugins.js', array('jquery'), null, true );
 	wp_enqueue_script('init-js', get_template_directory_uri() . '/assets/js/init.js', array('jquery'), null, true );
@@ -203,8 +204,6 @@ require get_template_directory().'/admin/cmb-config.php';
 // Custom Widgets Added
 require get_template_directory().'/widgets/recent-posts-widget.php';
 require get_template_directory().'/widgets/about-author-widget.php';
-require get_template_directory().'/widgets/tags-widget.php';
-//require get_template_directory().'/widgets/ads-widget.php';
 
 
 /**

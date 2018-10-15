@@ -74,31 +74,42 @@
                         <?php the_tags( '', ' ' ); ?>
                     </div>
             <?php } ?>
-
-            <div class="details-post-share">
-                <span class="post-s-title">Share This:</span>
-                <a href="#" class="waves-effect s-facebook" data-url="http://themeforest.net/item/stain-creative-one-page-portfolio-blog-template/9742110"><i class="fa fa-facebook"></i></a>
-                <a href="#" class="waves-effect s-twitter" data-url="http://themeforest.net/item/stain-creative-one-page-portfolio-blog-template/9742110"><i class="fa fa-twitter"></i></a>
-                <a href="#" class="waves-effect s-gplus" data-url="http://themeforest.net/item/stain-creative-one-page-portfolio-blog-template/9742110"><i class="fa fa-google-plus"></i></a>
-                <a href="#" class="waves-effect s-pinterest" data-url="http://themeforest.net/item/stain-creative-one-page-portfolio-blog-template/9742110" data-src="https://s-media-cache-ak0.pinimg.com/236x/0e/2f/97/0e2f976be48de2887b711985d781699c.jpg"><i class="fa fa-pinterest"></i></a>
-                <a href="#" class="waves-effect s-linkedin" data-url="http://themeforest.net/item/stain-creative-one-page-portfolio-blog-template/9742110"><i class="fa fa-linkedin"></i></a>
-
-            </div>
+            <?php 
+                $namirah_post_share = get_theme_mod( 'post_sharing', true );
+                if ( isset( $namirah_post_share ) && true == $namirah_post_share ) :
+            ?>
+                <div class="details-post-share namirah-share-post">
+                    <span class="post-s-title"><?php _e( 'Share This:', 'namirah' ); ?></span>
+                    <a href="#" class="waves-effect s-facebook" target="_blank" data-url="<?php the_permalink(); ?>"><i class="fa fa-facebook"></i></a>
+                    <a href="#" class="waves-effect s-twitter" target="_blank" data-url="<?php the_permalink(); ?>"><i class="fa fa-twitter"></i></a>
+                    <a href="#" class="waves-effect s-gplus" target="_blank" data-url="<?php the_permalink(); ?>"><i class="fa fa-google-plus"></i></a>
+                    <a href="#" class="waves-effect s-pinterest" target="_blank" data-url="<?php the_permalink(); ?>" data-src="https://s-media-cache-ak0.pinimg.com/236x/0e/2f/97/0e2f976be48de2887b711985d781699c.jpg"><i class="fa fa-pinterest"></i></a>
+                    <a href="#" class="waves-effect s-linkedin" target="_blank" data-url="<?php the_permalink(); ?>"><i class="fa fa-linkedin"></i></a>
+                </div>
+            <?php endif; ?>    
         <?php } ?>
 
-        <div class="post-share">
-            <span class="post-s-title">Share This:</span>
-            <a href="#" class="waves-effect s-facebook" data-url="http://themeforest.net/item/stain-creative-one-page-portfolio-blog-template/9742110"><i class="fa fa-facebook"></i></a>
-            <a href="#" class="waves-effect s-twitter" data-url="http://themeforest.net/item/stain-creative-one-page-portfolio-blog-template/9742110"><i class="fa fa-twitter"></i></a>
-            <a href="#" class="waves-effect s-gplus" data-url="http://themeforest.net/item/stain-creative-one-page-portfolio-blog-template/9742110"><i class="fa fa-google-plus"></i></a>
-            <a href="#" class="waves-effect s-pinterest" data-url="http://themeforest.net/item/stain-creative-one-page-portfolio-blog-template/9742110" data-src="https://s-media-cache-ak0.pinimg.com/236x/0e/2f/97/0e2f976be48de2887b711985d781699c.jpg"><i class="fa fa-pinterest"></i></a>
-            <a href="#" class="waves-effect s-linkedin" data-url="http://themeforest.net/item/stain-creative-one-page-portfolio-blog-template/9742110"><i class="fa fa-linkedin"></i></a>
-            <span class="post-share-close waves-effect" data-url="http://themeforest.net/item/stain-creative-one-page-portfolio-blog-template/9742110"><i class="ico-cross"></i></span>
-        </div>
+        <?php 
+        $namirah_post_share = get_theme_mod( 'post_sharing', true );
+        if ( isset( $namirah_post_share ) && true == $namirah_post_share ) : ?>
+            <div class="post-share namirah-share-post">
+                <span class="post-s-title"><?php _e( 'Share This:', 'namirah' ); ?></span>
+                <a href="#" class="waves-effect s-facebook" target="_blank" data-url="<?php the_permalink(); ?>"><i class="fa fa-facebook"></i></a>
+                <a href="#" class="waves-effect s-twitter" target="_blank" data-url="<?php the_permalink(); ?>"><i class="fa fa-twitter"></i></a>
+                <a href="#" class="waves-effect s-gplus" target="_blank" data-url="<?php the_permalink(); ?>"><i class="fa fa-google-plus"></i></a>
+                <a href="#" class="waves-effect s-pinterest" target="_blank" data-url="<?php the_permalink(); ?>" data-src="https://s-media-cache-ak0.pinimg.com/236x/0e/2f/97/0e2f976be48de2887b711985d781699c.jpg"><i class="fa fa-pinterest"></i></a>
+                <a href="#" class="waves-effect s-linkedin" target="_blank" data-url="<?php the_permalink(); ?>"><i class="fa fa-linkedin"></i></a>
+                <span class="post-share-close waves-effect" target="_blank" data-url="<?php the_permalink(); ?>"><i class="ico-cross"></i></span>
+            </div>
+        <?php endif; ?>
         <?php if( is_home() || is_archive() ) { ?>
             <div class="post-action clearfix">
-                <a href="<?php echo esc_url( get_permalink() ); ?>" class="post-btn waves-effect">View Details</a>
-                <a href="#" class="post-share-btn waves-effect"><i class="fa fa-share-alt"></i></a>
+                <a href="<?php echo esc_url( get_permalink() ); ?>" class="post-btn waves-effect"><?php _e( 'View Details', 'namirah' ); ?></a>
+                <?php 
+                    $namirah_post_share = get_theme_mod( 'post_sharing', true );
+                    if ( isset( $namirah_post_share ) && true == $namirah_post_share ) : ?> 
+                        <a href="#" class="post-share-btn waves-effect"><i class="fa fa-share-alt"></i></a>
+                <?php endif; ?>
             </div>
         <?php } ?>
     </div>

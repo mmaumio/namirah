@@ -30,24 +30,6 @@ function nm_register_metabox() {
 		'type' => 'checkbox',
 	) );
 
-	/* About Page Meta Box */
-
-	$cmb_about = new_cmb2_box( array(
-		'id'            => $prefix . 'about_meta',
-		'title'         => __( 'About Page Options', 'namirah' ),
-		'object_types'  => array( 'page', ), // Post type
-		'show_on'      => array( 'key' => 'page-template', 'value' => 'about.php' ),
-		'context'       => 'normal',
-		'priority'      => 'high',
-		'show_names'    => true, // Show field names on the left
-	) );
-
-	$cmb_about->add_field( array(
-	    'name'             => __('About Image', 'namirah'),
-	    'id'               => $prefix . 'about_img',
-	    'type'             => 'file',
-	) );
-
 	/**
 	 * Sample metabox to demonstrate each field type included
 	 */
@@ -93,18 +75,6 @@ function nm_register_metabox() {
 	    'type'             => 'text',
 	) );
 
-	$cmb_demo->add_field( array(
-		'name'       => __( 'Test Text', 'namirah' ),
-		'desc'       => __( 'field description (optional)', 'namirah' ),
-		'id'         => $prefix . 'text',
-		'type'       => 'text',
-		'show_on_cb' => 'yourprefix_hide_if_no_cats', // function should return a bool value
-		// 'sanitization_cb' => 'my_custom_sanitization', // custom sanitization callback parameter
-		// 'escape_cb'       => 'my_custom_escaping',  // custom escaping callback parameter
-		// 'on_front'        => false, // Optionally designate a field to wp-admin only
-		// 'repeatable'      => true,
-	) );
-
 	$cmb_post = new_cmb2_box( array(
 		'id'            => $prefix . 'posts',
 		'title'         => __( 'Post Metabox', 'namirah' ),
@@ -116,20 +86,6 @@ function nm_register_metabox() {
 		// 'closed'     => true, // true to keep the metabox closed by default
 	) );
 
-	$cmb_post->add_field( array(
-		'name' => __( 'Video URL', 'namirah' ),
-		'desc' => __( 'Youtube or Vimeo Video URL (Only Works in Video Post Format)', 'namirah' ),
-		'id'   => $prefix . 'video_url',
-		'type' => 'text',
-	) );
-
-	$cmb_post->add_field( array(
-		'name' => __( 'Audio URL', 'namirah' ),
-		'desc' => __( 'Soundcloud Audio URL (Only Works in Audio Post Format)', 'namirah' ),
-		'subtitle' => __('Only Works in Audio Post Format', 'namirah'),
-		'id'   => $prefix . 'audio_url',
-		'type' => 'text',
-	) );
 
 	$cmb_post->add_field( array(
 		'name' => __( 'Gallery Images', 'namirah' ),

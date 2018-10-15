@@ -3,7 +3,6 @@ var jq = jQuery.noConflict();
 (function (jq) {
     "use strict";
     jq(document).ready(function () {
-
         jq('.search-icon').on('click', function () {
             jq(this).parents('.nav-container').children('.search-form').fadeIn();
             jq('.search-input').focus();
@@ -16,7 +15,6 @@ var jq = jQuery.noConflict();
             var slideBgImg = jq(this).data('src')
             if (slideBgImg) {
                 jq(this).css({
-
                     'background-image': 'url(' + slideBgImg + ')'
                 });
             }
@@ -26,15 +24,15 @@ var jq = jQuery.noConflict();
 
         jq('.post-share-btn').on('click', function (ev) {
             ev.preventDefault();
-            var slideDown = jq(this).parents('.post-action').parents('.post-content').children('.post-share').slideDown();
+            var slideDown = jq(this).parents('.post-action').parents('.post-content').children('.namirah-share-post').slideDown();
             jq(this).fadeOut("fast");
 
         });
 
         jq('.post-share-close').on('click', function (ev) {
             ev.preventDefault();
-            var slideUp = jq(this).parents('.post-share').slideUp("fast");
-            jq(this).parents('.post-share').parents('.post-content').children('.post-action').children('.post-share-btn').fadeIn("fast");
+            var slideUp = jq(this).parents('.namirah-share-post').slideUp("fast");
+            jq(this).parents('.namirah-share-post').parents('.post-content').children('.post-action').children('.post-share-btn').fadeIn("fast");
 
         });
 
@@ -91,41 +89,6 @@ var jq = jQuery.noConflict();
         jq('.list-select-box').selectivity();
         jq('.post-featured-overlay').magnificPopup({
             type: 'image',
-//            gallery: {
-//                // options for gallery
-//                enabled: true,
-//                preload: [0, 2], // read about this option in next Lazy-loading section
-//
-//                navigateByImgClick: true,
-//
-//                arrowMarkup: '<button title="%title%" type="button" class="mfp-arrow mfp-arrow-%dir%"></button>', // markup of an arrow button
-//
-//                tPrev: 'Previous (Left arrow key)', // title for left button
-//                tNext: 'Next (Right arrow key)', // title for right button
-//                tCounter: '<span class="mfp-counter">%curr% of %total%</span>' // markup of counter
-//            },
-//            image: {
-//                markup: '<div class="mfp-figure">' +
-//                    '<div class="mfp-close"></div>' +
-//                    '<div class="mfp-img"></div>' +
-//                    '<div class="mfp-bottom-bar">' +
-//                    '<div class="mfp-title"></div>' +
-//                    '<div class="mfp-counter"></div>' +
-//                    '</div>' +
-//                    '</div>', // Popup HTML markup. `.mfp-img` div will be replaced with img tag, `.mfp-close` by close button
-//
-//                cursor: 'mfp-zoom-out-cur', // Class that adds zoom cursor, will be added to body. Set to null to disable zoom out cursor. 
-//
-//                titleSrc: 'title', // Attribute of the target element that contains caption for the slide.
-//                // Or the function that should return the title. For example:
-//                // titleSrc: function(item) {
-//                //   return item.el.attr('title') + '<small>by Marsel Van Oosten</small>';
-//                // }
-//
-//                verticalFit: true, // Fits image in area vertically
-//
-//                tError: '<a href="%url%">The image</a> could not be loaded.' // Error message
-//            }
         });
        
         
@@ -194,28 +157,28 @@ var jq = jQuery.noConflict();
 
 
         /*==Social Share==*/
-        jq('.s-facebook').each(function () {
+        jq('.namirah-share-post .s-facebook').each(function () {
             var BlogTitle = jq(this).attr('data-url');
             var fb = 'https://www.facebook.com/sharer.php?u=' + BlogTitle;
             jq(this).attr("href", fb)
         });
-        jq('.s-twitter').each(function () {
+        jq('.namirah-share-post .s-twitter').each(function () {
             var BlogTitle = jq(this).attr('data-url');
             var twitter = 'https://twitter.com/home?status=' + BlogTitle;
             jq(this).attr("href", twitter)
         });
-        jq('.s-gplus').each(function () {
+        jq('.namirah-share-post .s-gplus').each(function () {
             var BlogTitle = jq(this).attr('data-url');
             var gplus = 'https://plus.google.com/share?url=' + BlogTitle;
             jq(this).attr("href", gplus)
         });
-        jq('.s-pinterest').each(function () {
+        jq('.namirah-share-post .s-pinterest').each(function () {
             var BlogTitle = jq(this).attr('data-url');
             var dataImg = jq(this).attr('data-src');
             var pint = 'https://pinterest.com/pin/create/button/?url=' + BlogTitle + '&media=' + dataImg
             jq(this).attr("href", pint)
         });
-        jq('.s-linkedin').each(function () {
+        jq('.namirah-share-post .s-linkedin').each(function () {
             var BlogTitle = jq(this).attr('data-url');
             var ln = 'https://www.linkedin.com/shareArticle?mini=true&url=' + BlogTitle
             jq(this).attr("href", ln)

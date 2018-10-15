@@ -10,11 +10,10 @@ class Namirah_About_Author_Widget extends WP_Widget
     public function __construct()
     {
         parent::__construct(
-            'nm_about_author', 
+            'namirah_about_author', 
             __('Namirah: About Author Widget', 'namirah'), 
             array('description' => __('Namirah About Author Widget', 'namirah'),) 
         );
-        add_action('admin_enqueue_scripts', array($this, 'nm_media_enqueue_scripts'));
     }
 
     private $facebook;
@@ -33,34 +32,37 @@ class Namirah_About_Author_Widget extends WP_Widget
         $title = apply_filters('widget_title', $instance['title']);
         echo $before_widget;
         if($title) echo $before_title.$title.$after_title; 
-        if($instance['image']){
-            $image_src = wp_get_attachment_image_src($instance['image'], 'medium');
-        } else {
-            $image_src = '';   
-        }
         ?>
 
-        <div class="about-widget">
-            <div class="author-image">
-                <img src="<?php echo $image_src[0]; ?>" />
+        <div class="namirah-profile">
+            <div class="profile-image">
+                <img src="<?php echo esc_url( $instance['image'] ); ?>" />
             </div>
-            
-            <h3 class="n-author-name"><?php echo $instance['author_name'] ?></h3>
-            <span class="n-author-d"><?php echo $instance['designation']; ?></span>
-        
-            <p>
+            <div class="profile-info">
+                <div itemscope itemtype="http://data-vocabulary.org/Person">
+                    <h2 itemprop="name"><?php echo esc_html( $instance['author_name'] ); ?></h2>
+                    <span class="profile-title" itemprop="title"><?php echo esc_html( $instance['designation'] ); ?></span>
+                </div>
+                <p>
+                <?php
+                    if( isset($instance['no_words']) ) {
+                        $no_words = $instance['no_words'];
+                    } else {
+                        $no_words = '';
+                    }
+                    $namirah_author_bio = wp_trim_words($instance['description'], $no_words);
+                    echo esc_html( $namirah_author_bio ); 
+                ?>
+                </p>
+            </div>
             <?php
-                $nm_author_bio = $instance['description'];
-                echo $nm_author_bio; 
+            if(isset($instance['details_url'])) {
+                $details_url = $instance['details_url'];
+            } else {
+                $details_url = '';
+            }
             ?>
-            </p>
-            <div class="n-profile">
-                <span class="p-title">Connect:</span>
-                <a href="#" class="waves-effect s-facebook"><i class="fa fa-facebook"></i></a>
-                <a href="#" class="waves-effect s-twitter"><i class="fa fa-twitter"></i></a>
-                <a href="#" class="waves-effect s-gplus"><i class="fa fa-google-plus"></i></a>
-                <a href="#" class="waves-effect s-pinterest"><i class="fa fa-pinterest"></i></a>
-            </div>
+            <a class="btn-view-details" href="<?php echo esc_url( $details_url ); ?>"><?php _e('View Details', 'namirah'); ?></a>
         </div>
 
        <?php echo $after_widget;
@@ -79,11 +81,13 @@ class Namirah_About_Author_Widget extends WP_Widget
      */
     public function update($new_instance, $old_instance) {
         $instance = array();
-        $instance['title'] = strip_tags($new_instance['title']);
-        $instance['image'] = strip_tags($new_instance['image']);
-        $instance['author_name'] = strip_tags($new_instance['author_name']);
-        $instance['designation'] = strip_tags($new_instance['designation']);
-        $instance['description'] = $new_instance['description'];
+        $instance['title'] = sanitize_title( $new_instance['title'] );
+        $instance['image'] = esc_url_raw($new_instance['image']);
+        $instance['author_name'] = sanitize_text_field($new_instance['author_name']);
+        $instance['designation'] = sanitize_text_field($new_instance['designation']);
+        $instance['description'] = sanitize_text_field( $new_instance['description'] );
+        $instance['details_url'] = esc_url_raw( $new_instance['details_url'] );
+        $instance['no_words'] = sanitize_text_field( $new_instance['no_words'] );
 
         return $instance;
     }
@@ -127,14 +131,12 @@ class Namirah_About_Author_Widget extends WP_Widget
         <p>
             <label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:', 'namirah'); ?></label>
             <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" 
-            		type="text" value="<?php echo esc_attr($title); ?>"/>
+                    type="text" value="<?php echo esc_attr($title); ?>"/>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('image'); ?>"><?php _e('Image:','namirah'); ?></label>
+            <label for="<?php echo $this->get_field_id('image'); ?>"><?php _e('Image URL:','namirah'); ?></label>
             <br/>
-            <p class="imgpreview"></p>
-            <input type="hidden" id="<?php echo $this->get_field_id('image'); ?>" name="<?php echo $this->get_field_name('image'); ?>"  value="<?php echo $instance['image']; ?>" class="imgph" />
-            <input type="button" class="button btn-primary widgetuploader" value="<?php _e('Add Image', 'namirah'); ?>" />
+            <input type="text" id="<?php echo $this->get_field_id('image'); ?>" name="<?php echo $this->get_field_name('image'); ?>"  value="<?php echo $instance['image']; ?>" class="widefat" />
         </p>
         <p>
             <label for="<?php echo $this->get_field_id('author_name'); ?>"><?php _e('Author Name:', 'namirah'); ?></label>
@@ -163,41 +165,13 @@ class Namirah_About_Author_Widget extends WP_Widget
                     type="text" value="<?php if(isset($instance['details_url'])) { echo esc_attr($instance['details_url']); } ?>" />
         </p>
 
-        <script type="text/javascript">
-            function prefetch($){
-                $(".imgph").each(function(){
-                    var attid = $(this).val();
-                    var container = $(this).prev();
-                    container.html("");
-                    if(attid){
-                        $(this).next().val("Change Image");
-                        var attachment = new wp.media.model.Attachment.get(attid);
-                        attachment.fetch({success: function (att) {
-                            container.append("<img src='" + att.attributes.sizes.medium.url + "'/>");
-                        }});
-                    }
-                });
-            }
-
-            try {
-                prefetch(jQuery);
-            } catch(e){}
-        </script>
-
     <?php
-    }
-
-    public function nm_media_enqueue_scripts($hook) {
-        if($hook == "widgets.php") {
-            wp_enqueue_media();
-            wp_enqueue_script("media-widget-js", get_template_directory_uri() . "/assets/js/media-widget.js", array("jquery"), "1.0", 1);
-        }
     }
 
 } // class Namirah_About_Author_Widget
 
-function nm_about_author_widget() {
+function namirah_about_author_widget() {
     register_widget('Namirah_About_Author_Widget');
 }
 
-add_action('widgets_init', 'nm_about_author_widget');
+add_action('widgets_init', 'namirah_about_author_widget');
